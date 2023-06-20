@@ -36,19 +36,18 @@ public class Classe {
         String nuovoStudente;
         int nuovaMatricola;
         // scanner.nextLine();
+        System.out.println("Inserisci nome: ");
+        nuovoStudente = scanner.nextLine();
         // mettiamo un ciclo do-while per richiedere il nome nell'eventualità in cui il
         // nome inserito
         // sia già presente, utilizziamo la funzione studenteGiaPresente per
         // verificarlo.
-        System.out.println("Inserisci nome: ");
-        nuovoStudente = scanner.nextLine();
-
         do {
             System.out.println("Inserisci matricola: ");
             nuovaMatricola = scanner.nextInt();
         } while (matricolaGiaPresente(classe, nuovaMatricola));
 
-        // inseriamo i vari datii dello studente
+        // inseriamo i vari dati dello studente
         System.out.println("Inserisci eta': ");
         int nuovaEta = scanner.nextInt();
         scanner.nextLine();
@@ -63,6 +62,7 @@ public class Classe {
         System.out.println("Studente aggiunto con successo!");
     }
 
+    // funzione per confrontare due matricole
     private boolean matricolaGiaPresente(ArrayList<Studente> studenti, int matricola) {
         for (Studente studente : studenti) {
             if (studente.getMatricola() == matricola) {
@@ -127,11 +127,11 @@ public class Classe {
         Scanner scanner = new Scanner(System.in);
         boolean flag1 = true; // inizalizziamo la variabile flag1 che ci servirà solo per questo caso
         System.out.println("Inserisci il nome dello studente che vuoi modificare: ");
-        //scanner.nextLine();
+        // scanner.nextLine();
         String modificaStudente = scanner.nextLine(); // prendiamo il nome dello studente da modificare
         boolean newTrovato = false;
-        int indexNome = 0; // inizializziamo un indice che tiene conto della posizione dello studente nella
-                           // lista
+        int indexNome = 0; // inizializziamo un indice che tiene conto della posizione dello studente nella lista
+        int count = 0;    //usiamo il count per tenere traccia di più studenti con lo stesso nome
         // scorriamo la lista di studenti, quando troviamo lo studente con il nome
         // modificaStudente stampiamo
         // le sue info, salviamo la sua posizione in indexNome e aggiorniamo newTrovato
@@ -140,10 +140,21 @@ public class Classe {
                 classe.get(i).stampaInfo();
                 indexNome = i;
                 newTrovato = true;
+                count++;
             }
         }
         if (!newTrovato) {
             System.out.println("Studente non trovato.");
+        }
+
+        if (count >= 2) {
+            System.out.println("Inserisci la matricola dello studente che vuoi modificare");
+            int newMatricola = scanner.nextInt();
+            int i = 0;
+            while (newMatricola != classe.get(i).getMatricola()) {
+                i++;
+            }
+            classe.get(i).stampaInfo();
         }
         // se il nome c'è nell'elenco e flag1==true stampiamo a video il secondo menu
         // per modificare uno dei dati selezionato dall'utente
@@ -198,5 +209,4 @@ public class Classe {
             }
         }
     }
-
 }

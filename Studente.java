@@ -1,4 +1,4 @@
-public class Studente{
+public class Studente {
     //Attributi.
     protected String nome;
     protected int eta;
